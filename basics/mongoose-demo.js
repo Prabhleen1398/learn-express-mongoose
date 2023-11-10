@@ -26,3 +26,17 @@ async function insert() {
     await brkfstSchema.save();
     console.log('Created Entry : ' + {eggs: 7, drink: 'Tea'});
 }
+
+async function insertMany(entries) {
+  try {  
+    const insertedEntries = [];
+    await entries.forEach(async (entry) => {
+      const result = await Breakfast.create(entry);
+      insertedEntries.push(result);
+    });
+
+    console.log(`Inserted ${insertedEntries.length} entries into the 'BreakFastSchema' collection.`);
+  } catch (error) {
+    console.error('Error inserting entries:', error);
+  }
+}
